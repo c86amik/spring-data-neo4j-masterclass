@@ -24,7 +24,7 @@ public class Role {
 	
 	@Id
 	@GeneratedValue
-	Long id;
+	private Long id;
     private Collection<String> roles;
     @StartNode
     private Person person;

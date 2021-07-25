@@ -1,4 +1,4 @@
-# spring-data-jpa-masterclass
+# spring-data-neo4j-masterclass
 
 ## A good understanding of the usage of spring-data with REST Service and using MySQL as local Database
 
@@ -7,69 +7,59 @@
 * [Spring tool Suite](https://spring.io/tools) or [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr1/eclipse-ide-java-developers)
 * [Apache Maven](https://maven.apache.org/download.cgi)
 * [Git Bash](https://gramfile.com/git-bash-download/)
-* [MySQL](https://dev.mysql.com/downloads/mysql/) - Download the Community Edition. If it is a problem then you can download another one as provided below
-* [SQLYog](https://sqlyog.en.softonic.com/) - SQLYog. You can use this as replacement of MySQL
+* [Neo4j](https://neo4j.com/download/) - This is the Neo4j database. It uses a different query language named as <strong>Graph Database Query Language</strong> or in short it is called as <strong>GraphQL</strong>.
 * [Postman](https://www.postman.com/downloads/)
 
-### Steps to execute the DB Scripts
-Run the below scripts in any of the software either in MySQL Workbench or in SQLYog
+### Steps to install and run Neo4j database
+* Download the Software from the above URL
+* After downloading install the software in Windows or in Mac machine
+* Once it installed in your local system, run the Neo4j program
+* Neo4j provides a default database named as <strong>Movie</strong>
+* You can create your own database or you can also use the existing database as provided by Neo4j
+* I have used the existing <strong>Movie</strong> database of Neo4j
 
-* create_database.sql - It will create the database named as <strong>spring</strong>
-* drop_database.sql - It will delete the database <strong>spring</strong> 
+### Typical Neo4j Queries
+I have already told that Neo4j Database provides a default database known as `Movie` database. Lets discuss a little bit about the GraphQL queries
+* "MATCH (m:Movie) WHERE m.title =~ ('(?i).*'+{title}+'.*') RETURN m" - It means it will return the list of  movies matching the movie title
+* "MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) RETURN m.title as movie, collect(a.name) as cast LIMIT {limit}" - It is creating a Relationship between Movie and Person Nodes, so that it can show the list of actors acted in that movie
+* MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) WHERE m.title =~ ('(?i).*'+$title+'.*') RETURN a.name - It will retrun just the list of names who has acted in that particular Movie
 
-But don't run it before the create_database.sql, otherwise it will throw the error stating `No database is present with this name`
-
-* create_table.sql - It will create the table <strong>User</strong> under <strong>spring</strong> schema
-
-But though it is not required to execute, because when you run the application as Spring Boot and try to call the <strong>POST</strong> method it will automatically create the table <strong>User</strong> under <strong>spring</strong> database
-
-* drop_table.sql - To delete the <strong>User</strong> table
+### Problems faced while connecting with Movie DBMS from Spring Boot Application
+* In certain cases it can happen that from your application you can't connect to Movie Database
+* If you face such type of scenario then reset the password once
+* Click on the <strong>Movie</strong> DBMS, it will open a panel at the right hand side where there is an option that you can Reset the DBMS Password
+* Hit that option, reset the password, use the new password in your application and it will connect.
 
 ### Steps to clone and run the application
-* Install MySQL. Complete installation steps of [MySQL Workbench](https://dev.mysql.com/downloads/mysql/) are provided
-* If you face any problem while installing MySQL Workbench, then you can install SQLYog as mentioned in the Software Required steps
+* Install Neo4j Database as discussed in the [Steps to Install and run Neo4j database](https://github.com/c86amik/spring-data-neo4j-masterclass#steps-to-install-and-run-Neo4j-database).
 * Open Git Bash or even you can open Command Prompt (if you are using Windows) or Terminal (if you are using MAC) in your machine
 * Clone the application from github.com as   
-<code>git clone https://github.com/c86amik/spring-data-jpa-masterclass.git</code>
+<code>git clone https://github.com/c86amik/spring-data-neo4j-masterclass.git</code>
 * Open either <strong>STS</strong> or <strong>Eclipse</strong> and import the application as <strong>Maven</strong> project
 * After the application got successfully imported in either <strong>STS</strong> or <strong>Eclipse</strong>
 * Right Click on the application, select the <strong>Run As</strong> option, and then select <strong>Spring Boot App</strong>
-* The application will start in the port <strong>7110</strong>
+* The application will start in the port <strong>7112</strong>
 * Open the Postman and test the REST Endpoints
 
 ### Testing using Postman
 <ol>
-<li><strong>Get All Users</strong> - localhost:7110/allUsers</li>
-<li><strong>Save an User</strong> - localhost:7110/saveUser</li>
-<li><strong>Update an User</strong> - localhost:7110/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in MongoDB</li>
-<li><strong>Delete an User</strong> - localhost:7110/deleteUser/{id}</li>
-<li><strong>Get user by firstName</strong> - localhost:7110/getUserByFirstName/{firstName}</li>
-<li><strong>Get user by lastName</strong> - localhost:7110/getUserByLastName/{lastName}</li>
-<li><strong>Get user by mobileNo</strong> - localhost:7110/getUserByMobileNo/{mobileNo}</li>
-<li><strong>Get user by Email</strong> - localhost:7110/getUserByEmail/{email}</li>
-<li><strong>Get user by panNo</strong> - localhost:7110/getUserByPan/{panNo}</li>
-<li><strong>Get user by name</strong> - localhost:7110/getUserByName/{firstName}/{lastName}. Here <strong>name</strong> is the combination of <strong>firstName</strong> and <strong>lastName</strong></li>
+<li><strong>Get All Persons</strong> - localhost:7112/allPerson</li>
+<li><strong>Find a Specific Person details</strong> - localhost:7112/findSpecificPerson/{name}</li>
+<li><strong>Get All Movies</strong> - localhost:7112/allMovies</li>
+<li><strong>Find a Specific Movie Details</strong> - localhost:7112/findSpecificMovie/{title}</li>
+<li><strong>Find a List of Specific Movies matching the title</strong> - localhost:7112/findMovies/{title}. It will return the list of Movies matching the input as provided. Ex - If you pass the title as `The Matrix` it will return all the movies which is matching `The Matrix` content as `The Matrix`, `The Matrix Revolutions`, etc.</li>
+<li><strong>Save a Movie along with the Persons who acted in that Movie</strong> - localhost:7112/saveMovie</li>
+<li><strong>Get user by mobileNo</strong> - localhost:7112/findMovieActors/{title}. It will return the List of actors who has acted in that specific movie</li>
 </ol>
 
 #### Dummy JSON object
 * Body for the <strong>POST</strong> Method   
 <code>{
-	"firstName" : ${firstName},
-	"middleName" : ${middleName},
-	"lastName" : ${lastName},
-	"mobileNo" : ${mobileNo},
-	"email" : ${email},
-	"panNo" : ${panNo}
-}</code>
-* Body for the <strong>PUT</strong> method
-<code>{
-	"userId" : ${mySQL_Id},
-	"firstName" : ${firstName},
-	"middleName" : ${middleName},
-	"lastName" : ${lastName},
-	"mobileNo" : ${mobileNo},
-	"email" : ${email},
-	"panNo" : ${panNo}
+	"personName" : ${personName},
+	"movieName" : ${movieName},
+	"releasedYear" : ${releasedYear},
+	"roleName" : "${roleName}",
+    "tagLine" : "${tagLine}"
 }</code>
 
 	

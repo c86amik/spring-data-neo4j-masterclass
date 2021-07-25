@@ -23,7 +23,7 @@ public class Movie {
 	
 	@Id
 	@GeneratedValue
-    Long id;
+    private Long id;
     private String title;
     private Long released;
     private String tagline;

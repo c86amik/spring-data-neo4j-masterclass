@@ -61,6 +61,7 @@ public class SpringDataNeo4jMovieService {
 		Movie movie = new Movie();
 		movie.setTitle(movieRequest.getMovieName());
 		movie.setReleased(movieRequest.getReleasedYear());
+		movie.setTagline(movieRequest.getTagLine());
 		movieRestRepository.save(movie);
 		
 		Person person = new Person();
