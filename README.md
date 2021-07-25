@@ -1,6 +1,6 @@
 # spring-data-neo4j-masterclass
 
-## A good understanding of the usage of spring-data with REST Service and using MySQL as local Database
+## A good understanding of the usage of spring-data with REST Service and using Neo4j as local Database
 
 ### Software Required
 * [Java 1.8](https://www.oracle.com/in/java/technologies/javase/javase-jdk8-downloads.html)
@@ -20,9 +20,9 @@
 
 ### Typical Neo4j Queries
 I have already told that Neo4j Database provides a default database known as `Movie` database. Lets discuss a little bit about the GraphQL queries
-* "MATCH (m:Movie) WHERE m.title =~ ('(?i).*'+{title}+'.*') RETURN m" - It means it will return the list of  movies matching the movie title
-* "MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) RETURN m.title as movie, collect(a.name) as cast LIMIT {limit}" - It is creating a Relationship between Movie and Person Nodes, so that it can show the list of actors acted in that movie
-* MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) WHERE m.title =~ ('(?i).*'+$title+'.*') RETURN a.name - It will retrun just the list of names who has acted in that particular Movie
+* <strong>"MATCH (m:Movie) WHERE m.title =~ ('(?i).*'+{title}+'.*') RETURN m"</strong> - It means it will return the list of  movies matching the movie title
+* <strong>"MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) RETURN m.title as movie, collect(a.name) as cast LIMIT {limit}"</strong> - It is creating a Relationship between Movie and Person Nodes, so that it can show the list of actors acted in that movie
+* <strong>"MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) WHERE m.title =~ ('(?i).*'+$title+'.*') RETURN a.name"</strong> - It will return just the list of names who has acted in that particular Movie
 
 ### Problems faced while connecting with Movie DBMS from Spring Boot Application
 * In certain cases it can happen that from your application you can't connect to Movie Database
@@ -32,6 +32,7 @@ I have already told that Neo4j Database provides a default database known as `Mo
 
 ### Steps to clone and run the application
 * Install Neo4j Database as discussed in the [Steps to Install and run Neo4j database](https://github.com/c86amik/spring-data-neo4j-masterclass#steps-to-install-and-run-Neo4j-database).
+* Run the Neo4j Database
 * Open Git Bash or even you can open Command Prompt (if you are using Windows) or Terminal (if you are using MAC) in your machine
 * Clone the application from github.com as   
 <code>git clone https://github.com/c86amik/spring-data-neo4j-masterclass.git</code>
