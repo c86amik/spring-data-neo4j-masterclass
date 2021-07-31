@@ -7,7 +7,7 @@
 * [Spring tool Suite](https://spring.io/tools) or [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr1/eclipse-ide-java-developers)
 * [Apache Maven](https://maven.apache.org/download.cgi)
 * [Git Bash](https://gramfile.com/git-bash-download/)
-* [Neo4j](https://neo4j.com/download/) - This is the Neo4j database. It uses a different query language named as <strong>Graph Database Query Language</strong> or in short it is called as <strong>GraphQL</strong>.
+* [Neo4j](https://neo4j.com/download/) - This is the Neo4j database. It uses a different query language named as <strong>Cypher Query Language</strong> or in short it is called as <strong>CQL</strong>.
 * [Postman](https://www.postman.com/downloads/)
 
 ### Steps to install and run Neo4j database
@@ -19,10 +19,18 @@
 * I have used the existing <strong>Movie</strong> database of Neo4j
 
 ### Typical Neo4j Queries
-I have already told that Neo4j Database provides a default database known as `Movie` database. Lets discuss a little bit about the GraphQL queries
+I have already told that Neo4j Database provides a default database known as `Movie` database. Lets discuss a little bit about the Cypher queries
+<ol>
+<li>Simple Cypher Query Language Examples</li>
+* <strong>MATCH (p:Person) RETURN p LIMIT 1</strong> - It means it will return only one person
+* <strong>MATCH (tom:Person {name: 'Tom Hanks'}) RETURN tom</strong> - It will return Tom Hanks
+* <strong>MATCH (:Person {name: 'Tom Hanks'})-[:DIRECTED]->(movie:Movie) RETURN movie</strong> - It will return the Movie that Tom Hanks has directed
+* <strong>MATCH (:Person {name: 'Tom Hanks'})-[:DIRECTED]->(movie:Movie) RETURN movie.title</strong> - It will return the title of the Movie that Tom Hanks has directed
+<li>Complex Cypher Query Language Examples</li>
 * <strong>"MATCH (m:Movie) WHERE m.title =~ ('(?i).*'+{title}+'.*') RETURN m"</strong> - It means it will return the list of  movies matching the movie title
 * <strong>"MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) RETURN m.title as movie, collect(a.name) as cast LIMIT {limit}"</strong> - It is creating a Relationship between Movie and Person Nodes, so that it can show the list of actors acted in that movie
 * <strong>"MATCH (m:Movie)<-[:ACTED_IN]-(a:Person) WHERE m.title =~ ('(?i).*'+$title+'.*') RETURN a.name"</strong> - It will return just the list of names who has acted in that particular Movie
+</ol>
 
 ### Problems faced while connecting with Movie DBMS from Spring Boot Application
 * In certain cases it can happen that from your application you can't connect to Movie Database
