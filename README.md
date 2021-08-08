@@ -55,7 +55,7 @@
 <li><strong>Find a Specific Movie Details</strong> - localhost:7112/findSpecificMovie/{title}</li>
 <li><strong>Find a List of Specific Movies matching the title</strong> - localhost:7112/findMovies/{title}. It will return the list of Movies matching the input as provided. Ex - If you pass the title as `The Matrix` it will return all the movies which is matching `The Matrix` content as `The Matrix`, `The Matrix Revolutions`, etc.</li>
 <li><strong>Save a Movie along with the Persons who acted in that Movie</strong> - localhost:7112/saveMovie</li>
-<li><strong>Get user by mobileNo</strong> - localhost:7112/findMovieActors/{title}. It will return the List of actors who has acted in that specific movie</li>
+<li><strong>List of Actors act in a Specific Movie</strong> - localhost:7112/findMovieActors/{title}. It will return the List of actors who has acted in that specific movie</li>
 </ol>
 
 #### Dummy JSON object
