@@ -64,8 +64,8 @@
 	"personName" : ${personName},
 	"movieName" : ${movieName},
 	"releasedYear" : ${releasedYear},
-	"roleName" : "${roleName}",
-    "tagLine" : "${tagLine}"
+	"roleName" : ${roleName},
+    "tagLine" : ${tagLine}
 }</code>
 
 	
