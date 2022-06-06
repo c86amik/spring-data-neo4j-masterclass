@@ -61,11 +61,11 @@
 #### Dummy JSON object
 * Body for the <strong>POST</strong> Method   
 <code>{
-	"personName" : ${personName},
-	"movieName" : ${movieName},
-	"releasedYear" : ${releasedYear},
-	"roleName" : ${roleName},
-    "tagLine" : ${tagLine}
+	"personName" : "Person Name",
+	"movieName" : "Movie Name",
+	"releasedYear" : "2022",
+	"roleName" : "Actor",
+    "tagLine" : "Test Tag Line"
 }</code>
 
 	
